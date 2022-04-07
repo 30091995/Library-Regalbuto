@@ -7,9 +7,13 @@ html, body {
     overflow: hidden;
   }
 
+#root{
+    height: 100%; 
+}
 
   body{
     background: ${p => p.theme.colors.black};
+    color: ${p => p.theme.colors.white};
   }`
 
   export {GlobalStyles}
