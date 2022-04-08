@@ -1,11 +1,13 @@
-import { Layout } from "./components/Layout/Layout";
 import { Home } from "./views/Home";
+import { Routes, Route } from "react-router-dom";
+import { EmailRequest } from "./views/EmailRequest";
 
 function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <Routes>
+      <Route path="/book/:bookId" element={<EmailRequest />} />
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 
