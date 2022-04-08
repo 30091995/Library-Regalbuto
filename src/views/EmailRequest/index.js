@@ -13,10 +13,10 @@ export const EmailRequest = () => {
       setBook(response);
     }
     fetchBook();
-  }, []);
+  }, [bookId]);
 
   if (!book) {
     return "loading";
   }
-  return <EmailRequestFormContainer />;
+  return <EmailRequestFormContainer book={book} />;
 };

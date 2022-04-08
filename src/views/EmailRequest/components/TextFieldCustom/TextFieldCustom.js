@@ -5,8 +5,10 @@ import {
   inputLabelClasses,
   TextField,
 } from "@mui/material";
+import { useController } from "react-hook-form";
 
 const StyledTextField = styled(TextField)({
+  width: "500px",
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
     borderColor: "white",
   },
@@ -36,15 +38,39 @@ const StyledTextField = styled(TextField)({
   },
 });
 
-export const TextFieldCustom = ({ label, defaultValue, readOnly }) => {
+export const TextFieldCustom = ({
+  label,
+  defaultValue,
+  readOnly,
+  control,
+  type,
+  required,
+  nameField,
+}) => {
+  const {
+    field: { onChange, onBlur, name, value, ref },
+    fieldState: { invalid, isTouched },
+  } = useController({
+    name: nameField,
+    control,
+    rules: { required: required },
+    defaultValue: defaultValue || "",
+  });
+
   return (
     <StyledTextField
       label={label}
       variant="outlined"
-      defaultValue={defaultValue && defaultValue}
-      InputLabelProps={{
+      inputRef={ref}
+      error={invalid || (invalid && isTouched)}
+      onChange={onChange}
+      onBlur={onBlur}
+      value={value}
+      name={name}
+      type={type}
+      InputProps={{
         readOnly: readOnly,
-        "aria-readonly": readOnly ? true : undefined,
+        "aria-readonly": readOnly,
       }}
     />
   );
